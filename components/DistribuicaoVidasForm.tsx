@@ -1,0 +1,1 @@
+// Arquivo removido - funcionalidade movida para SimuleParaSaudeForm

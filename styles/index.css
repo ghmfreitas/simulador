@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* SulAmérica Brand Colors */
+    --primary: 14 89% 64%; /* #F05223 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 29 100% 50%; /* #F98900 */
+    --secondary-foreground: 0 0% 100%;
+    --accent: 221 100% 18%; /* #001D5F */
+    --accent-foreground: 0 0% 100%;
+    
+    /* Base Colors */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    
+    /* UI Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 14 89% 64%; /* Same as primary */
+    
+    /* State Colors */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    
+    /* Sizing */
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Aestetico', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Aestetico Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'Aestetico';
+  src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+/* Custom Utilities */
+@layer utilities {
+  /* SulAmérica Brand Colors */
+  .text-orange-sulamerica { color: #F05223; }
+  .bg-orange-sulamerica { background-color: #F05223; }
+  .border-orange-sulamerica { border-color: #F05223; }
+  
+  .text-blue-sulamerica { color: #001D5F; }
+  .bg-blue-sulamerica { background-color: #001D5F; }
+  .border-blue-sulamerica { border-color: #001D5F; }
+  
+  .text-secondary-sulamerica { color: #F98900; }
+  .bg-secondary-sulamerica { background-color: #F98900; }
+  .border-secondary-sulamerica { border-color: #F98900; }
+}
+
+/* Custom Scrollbar */
+@layer components {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground rounded-md;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-foreground;
+  }
+}
+
+/* Animation Utilities */
+@layer utilities {
+  .animate-in {
+    animation: animateIn 0.3s ease-out;
+  }
+  
+  .animate-out {
+    animation: animateOut 0.2s ease-in;
+  }
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes animateOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
