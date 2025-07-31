@@ -400,20 +400,34 @@ export function DetalhesDoProductoForm({
                     {/* Valor Total */}
                     <div className="text-right">
                       <h3 className="font-['Lintel:Bold',_sans-serif] text-[#6a7178] text-[14px] leading-[20px] uppercase tracking-wider mb-2">
-                        Valor Total dos Planos
+                        Soma dos Planos Selecionados
                       </h3>
                       <div className="flex items-baseline gap-2 justify-end">
                         <span className="font-['Lintel:Bold',_sans-serif] text-[#272b30] text-[20px]">R$</span>
                         <span className="font-['Lintel:Bold',_sans-serif] text-[#272b30] text-[32px] leading-[40px]">
                           {(() => {
-                            const total = plans.reduce((sum, plan, index) => {
-                              const planId = selectedPlans?.[index] || plan.id;
-                              const vidasForPlan = vidasDistributionByPlan?.[planId] || {};
-                              const totalVidasPlan = Object.values(vidasForPlan).reduce((vidasSum, count) => vidasSum + count, 0);
-                              const price = parseFloat(plan.price.replace(/\./g, '').replace(',', '.'));
-                              return sum + (price * totalVidasPlan);
+                            // Usar selectedPlansData em vez de plans para incluir TODOS os planos selecionados
+                            const allSelectedPlans = selectedPlansData || [];
+                            
+                            const total = allSelectedPlans.reduce((sum, plan) => {
+                              // Verificar se o preço já é um número ou string
+                              let price;
+                              if (typeof plan.price === 'number') {
+                                price = plan.price;
+                              } else {
+                                // Se for string, fazer a conversão
+                                const priceString = plan.price.toString();
+                                price = parseFloat(priceString.replace(/\./g, '').replace(',', '.'));
+                              }
+                              
+                              return sum + price;
                             }, 0);
-                            return formatCurrency(total.toFixed(2));
+                            
+                            // Formatar diretamente sem passar pela função formatCurrency
+                            return new Intl.NumberFormat('pt-BR', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2
+                            }).format(total);
                           })()}
                         </span>
                         <span className="font-['Lintel:Medium',_sans-serif] text-[#6a7178] text-[20px]">/mês</span>
